@@ -12,8 +12,12 @@ export default createRouter({
       component: () => import('./views/BrowserView.vue')
     },
     {
-      path: '/test',
-      component: () => import('./views/TestView.vue')
+      path: '/test/contextmenu/file',
+      component: () => import('./views/ContextMenuFileTestView.vue')
+    },
+    {
+      path: '/test/contextmenu/directory',
+      component: () => import('./views/ContextMenuDirectoryTestView.vue')
     }
   ]
 })
