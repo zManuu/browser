@@ -10,6 +10,10 @@ export default createRouter({
     {
       path: '/browse/:dir',
       component: () => import('./views/BrowserView.vue')
+    },
+    {
+      path: '/test',
+      component: () => import('./views/TestView.vue')
     }
   ]
 })
