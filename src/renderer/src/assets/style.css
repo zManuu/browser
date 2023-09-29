@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --slate-100: #f1f5f9;
+    --slate-800: #1e293b;
+}
+
+body {
+    color: var(--slate-100);
+    background: var(--slate-800);
+}
