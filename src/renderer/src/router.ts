@@ -12,12 +12,18 @@ export default createRouter({
       component: () => import('./views/BrowserView.vue')
     },
     {
-      path: '/test/contextmenu/file',
-      component: () => import('./views/ContextMenuFileTestView.vue')
-    },
-    {
-      path: '/test/contextmenu/directory',
-      component: () => import('./views/ContextMenuDirectoryTestView.vue')
+      path: '/test',
+      component: () => import('./views/TestView.vue'),
+      children: [
+        {
+          path: 'contextmenu/file',
+          component: () => import('./views/ContextMenuFileTestView.vue')
+        },
+        {
+          path: 'contextmenu/directory',
+          component: () => import('./views/ContextMenuDirectoryTestView.vue')
+        }
+      ]
     }
   ]
 })

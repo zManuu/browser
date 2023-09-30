@@ -12,7 +12,6 @@
 <script lang="ts">
 import type { FsEntry } from '@shared/FsEntry'
 import { type PropType, defineComponent } from 'vue'
-import { send } from '@renderer/ipc'
 
 export default defineComponent({
   props: {
@@ -21,21 +20,10 @@ export default defineComponent({
       required: true
     }
   },
+  emits: ['handleClick'],
   methods: {
     handleClick() {
-      const directoryName = this.fsEntry.parentPath
-      const path = `${directoryName}\\${this.fsEntry.name}`
-
-      switch (this.fsEntry.type) {
-        case 'directory':
-          console.log(`Navigating to directory ${path}.`)
-          this.$router.push(`/browse/${path}`)
-          break
-        case 'file':
-          console.log(`Opening file ${path}.`)
-          send('openFile', path)
-          break
-      }
+      this.$emit('handleClick')
     }
   }
 })

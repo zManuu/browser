@@ -9,10 +9,15 @@ import file_css from '@renderer/assets/icons/file_css.svg'
 import file_gitignore from '@renderer/assets/icons/file_gitignore.svg'
 import file_html from '@renderer/assets/icons/file_html.svg'
 import file_java from '@renderer/assets/icons/file_java.svg'
-import file_javaScript from '@renderer/assets/icons/file_javaScript.svg'
 import file_json from '@renderer/assets/icons/file_json.svg'
 import file_vue from '@renderer/assets/icons/file_vue.svg'
 import file_xml from '@renderer/assets/icons/file_xml.svg'
+import javaScript from '@renderer/assets/icons/javaScript.svg'
+import typescript from '@renderer/assets/icons/typescript.png'
+import compile from '@renderer/assets/icons/compile.svg'
+import run from '@renderer/assets/icons/run.svg'
+import clear from '@renderer/assets/icons/clear.svg'
+import terminal from '@renderer/assets/icons/terminal.svg'
 
 export {
   vsc,
@@ -26,8 +31,13 @@ export {
   file_gitignore,
   file_html,
   file_java,
-  file_javaScript,
   file_json,
   file_vue,
-  file_xml
+  file_xml,
+  javaScript,
+  typescript,
+  compile,
+  run,
+  clear,
+  terminal
 }
