@@ -10,7 +10,13 @@ export const fileTypes = {
   java: 'java',
   class: 'class',
   gitignore: 'gitignore',
-  json: 'json'
+  json: 'json',
+  svg: 'svg',
+  png: 'png',
+  jpg: 'jpg',
+  yml: 'yml',
+  yaml: 'yaml',
+  xml: 'xml'
 } as const
 
 export type fileType = keyof typeof fileTypes

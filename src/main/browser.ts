@@ -29,6 +29,31 @@ export function enable() {
       console.log(`Opened ${cleanFilePath} with Visual Studio Code.`)
     })
   })
+
+  handleRequest('requestPreview', async (_ev, args) => {
+    if (!fsSync.existsSync(args.path)) {
+      return 'ERROR: File doesn\'t exist.'
+    }
+
+    if (!args.path.includes('.')) {
+      // requested preview of directory
+      const children = await fs.readdir(args.path)
+      return children.join('\n')
+    }
+
+    if (args.type == 'text') {
+      const fileBuffer = await fs.readFile(args.path)
+      return fileBuffer.toString('utf-8')
+    }
+
+    if (args.type == 'img') {
+      const fileContent = await fs.readFile(args.path)
+      const base64 = fileContent.toString('base64')
+      return base64
+    }
+
+    return 'ERROR'
+  })
 }
 
 function getFileStats(filePath: string): fsSync.Stats | false {

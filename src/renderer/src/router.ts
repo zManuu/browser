@@ -22,6 +22,14 @@ export default createRouter({
         {
           path: 'contextmenu/directory',
           component: () => import('./views/ContextMenuDirectoryTestView.vue')
+        },
+        {
+          path: 'preview/file',
+          component: () => import('./views/PreviewFileTestView.vue')
+        },
+        {
+          path: 'preview/directory',
+          component: () => import('./views/PreviewDirectoryTestView.vue')
         }
       ]
     }

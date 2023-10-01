@@ -5,7 +5,7 @@ function getTestFile(type: fileType = fileTypes[0]): File {
   return {
     type: 'file',
     name: `test.${type}`,
-    parentPath: 'C:\\Users\\Manuel Rettkowski\\Downloads',
+    parentPath: 'M:\\Developement\\Projects\\app\\browser\\src\\renderer\\src\\assets\\test-files',
     sizeInKb: 5,
     isHidden: false
   }
@@ -14,8 +14,8 @@ function getTestFile(type: fileType = fileTypes[0]): File {
 function getTestDirectory(): Directory {
   return {
     type: 'directory',
-    name: 'Downloads',
-    parentPath: 'C:\\Users\\Manuel Rettkowski',
+    name: 'test-files',
+    parentPath: 'M:\\Developement\\Projects\\app\\browser\\src\\renderer\\src\\assets',
     sizeInKb: 50,
     isHidden: false
   }

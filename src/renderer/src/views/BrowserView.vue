@@ -1,7 +1,7 @@
 <template>
   <BrowseUpComponent @go-up="goUp" />
   <div class="flex">
-    <div class="w-full flex flex-col">
+    <div class="w-5/6 flex flex-col">
       <FsEntryComponent
         v-for="(fsEntry, index) in shownFsEntries"
         :key="index"
@@ -9,7 +9,10 @@
         @handle-click="handleClick(fsEntry)"
       />
     </div>
-    <ContextMenuComponent v-if="selectedFsEntry" :fs-entry="selectedFsEntry" />
+    <div class="w-1/6 flex flex-col">
+      <ContextMenuComponent v-if="selectedFsEntry" :fs-entry="selectedFsEntry" />
+      <PreviewComponent v-if="selectedFsEntry" :fs-entry="selectedFsEntry" />
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -20,9 +23,10 @@ import { request, send } from '../ipc'
 import FsEntryComponent from '@renderer/components/FsEntryComponent.vue'
 import BrowseUpComponent from '@renderer/components/BrowseUpComponent.vue'
 import ContextMenuComponent from '@renderer/components/ContextMenuComponent.vue'
+import PreviewComponent from '@renderer/components/PreviewComponent.vue'
 
 export default defineComponent({
-  components: { FsEntryComponent, BrowseUpComponent, ContextMenuComponent },
+  components: { FsEntryComponent, BrowseUpComponent, ContextMenuComponent, PreviewComponent },
   data() {
     return {
       currentDirectory: undefined as Directory | undefined,
