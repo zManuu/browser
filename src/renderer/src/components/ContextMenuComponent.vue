@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-full select-none opacity-75 hover:opacity-100 bg-slate-700">
+  <div class="flex flex-col w-full select-none opacity-75 hover:opacity-100 bg-slate-800">
     <div v-for="(itemCategory, itemCategoryIndex) in menuItems.keys()" :key="itemCategoryIndex">
       <h1 class="my-3 font-semibold text-xl text-center">{{ itemCategory }}</h1>
       <div

@@ -1,17 +1,25 @@
 <template>
-  <BrowseUpComponent @go-up="goUp" />
   <div class="flex">
-    <div class="w-5/6 flex flex-col">
+    <ScrollComponent
+      :class="selectedFsEntry ? 'w-2/3' : 'w-full'"
+      class="max-h-screen"
+      axis="vertical"
+    >
+      <BrowseUpComponent @go-up="goUp" />
       <FsEntryComponent
         v-for="(fsEntry, index) in shownFsEntries"
         :key="index"
         :fs-entry="fsEntry"
         @handle-click="handleClick(fsEntry)"
       />
-    </div>
-    <div class="w-1/6 flex flex-col">
-      <ContextMenuComponent v-if="selectedFsEntry" :fs-entry="selectedFsEntry" />
-      <PreviewComponent v-if="selectedFsEntry" :fs-entry="selectedFsEntry" />
+    </ScrollComponent>
+    <div v-if="selectedFsEntry" class="w-1/3 bg-slate-700 space-y-[2vh]">
+      <ScrollComponent axis="vertical" class="h-[49vh]">
+        <ContextMenuComponent :fs-entry="selectedFsEntry" />
+      </ScrollComponent>
+      <ScrollComponent axis="both" class="h-[49vh]">
+        <PreviewComponent :fs-entry="selectedFsEntry" />
+      </ScrollComponent>
     </div>
   </div>
 </template>
@@ -24,9 +32,16 @@ import FsEntryComponent from '@renderer/components/FsEntryComponent.vue'
 import BrowseUpComponent from '@renderer/components/BrowseUpComponent.vue'
 import ContextMenuComponent from '@renderer/components/ContextMenuComponent.vue'
 import PreviewComponent from '@renderer/components/PreviewComponent.vue'
+import ScrollComponent from '@renderer/components/ScrollComponent.vue'
 
 export default defineComponent({
-  components: { FsEntryComponent, BrowseUpComponent, ContextMenuComponent, PreviewComponent },
+  components: {
+    FsEntryComponent,
+    BrowseUpComponent,
+    ContextMenuComponent,
+    PreviewComponent,
+    ScrollComponent
+  },
   data() {
     return {
       currentDirectory: undefined as Directory | undefined,

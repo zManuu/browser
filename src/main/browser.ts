@@ -6,6 +6,8 @@ import { type Directory } from '../shared/Directory'
 import { FsEntry, cleanPath, isHidden } from '../shared/FsEntry'
 import { exec } from 'child_process'
 
+const MAX_PREVIEW_FILE_SIZE = 1 * 1024 * 1024 // = 1mb
+
 export function enable() {
   console.log('enabling the browser window')
 
@@ -32,7 +34,7 @@ export function enable() {
 
   handleRequest('requestPreview', async (_ev, args) => {
     if (!fsSync.existsSync(args.path)) {
-      return 'ERROR: File doesn\'t exist.'
+      return "ERROR: File doesn't exist."
     }
 
     if (!args.path.includes('.')) {
@@ -41,15 +43,20 @@ export function enable() {
       return children.join('\n')
     }
 
+    const fileStats = fsSync.statSync(args.path)
+
+    if (fileStats.size > MAX_PREVIEW_FILE_SIZE) {
+      return 'ERROR: File too big to preview'
+    }
+
     if (args.type == 'text') {
       const fileBuffer = await fs.readFile(args.path)
       return fileBuffer.toString('utf-8')
     }
 
     if (args.type == 'img') {
-      const fileContent = await fs.readFile(args.path)
-      const base64 = fileContent.toString('base64')
-      return base64
+      const fileBuffer = await fs.readFile(args.path)
+      return fileBuffer.toString('base64')
     }
 
     return 'ERROR'

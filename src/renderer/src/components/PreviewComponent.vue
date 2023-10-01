@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-full select-none opacity-75 hover:opacity-100 bg-slate-700 p-3">
+  <div class="flex flex-col w-full select-none opacity-75 hover:opacity-100 bg-slate-800 p-3">
     <h1 class="font-semibold text-xl">Preview: {{ fsEntry.name }}</h1>
     <p v-if="previewType == 'text'" class="whitespace-pre break-words">
       {{ previewValue }}
@@ -35,6 +35,7 @@ export default defineComponent({
         case 'png':
         case 'jpg':
         case 'svg':
+        case 'ico':
           return 'img'
       }
 

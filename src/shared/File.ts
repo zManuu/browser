@@ -16,7 +16,8 @@ export const fileTypes = {
   jpg: 'jpg',
   yml: 'yml',
   yaml: 'yaml',
-  xml: 'xml'
+  xml: 'xml',
+  ico: 'ico'
 } as const
 
 export type fileType = keyof typeof fileTypes

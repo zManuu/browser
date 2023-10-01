@@ -40,8 +40,11 @@ function createWindow(): void {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
 
+  // disable default scrollbar
+  mainWindow.webContents.insertCSS('html, body { overflow: hidden; }')
+
   mainWindow.webContents.on('dom-ready', () => {
-    enable(mainWindow)
+    enable()
   })
 }
 
