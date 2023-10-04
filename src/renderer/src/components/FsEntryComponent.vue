@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full h-min bg-slate-700 border-2 border-slate-600 p-3 flex justify-start items-center space-x-5 cursor-pointer hover:bg-slate-600"
+    class="w-full h-min bg-slate-700 border-2 border-slate-600 p-3 flex justify-start items-center space-x-5 cursor-pointer hover:bg-slate-600 select-none"
     :class="{ 'bg-slate-800': fsEntry.isHidden }"
     @click="handleClick"
   >

@@ -13,10 +13,11 @@
         @handle-click="handleClick(fsEntry)"
       />
     </ScrollComponent>
-    <div v-if="selectedFsEntry" class="w-1/3 bg-slate-700 space-y-[2vh]">
+    <div v-if="selectedFsEntry" class="w-1/3 space-y-[2vh]">
       <ScrollComponent axis="vertical" class="h-[49vh]">
         <ContextMenuComponent :fs-entry="selectedFsEntry" />
       </ScrollComponent>
+      <div class="h-[2vh] bg-slate-600"></div>
       <ScrollComponent axis="both" class="h-[49vh]">
         <PreviewComponent :fs-entry="selectedFsEntry" />
       </ScrollComponent>

@@ -6,7 +6,7 @@ import { type Directory } from '../shared/Directory'
 import { FsEntry, cleanPath, isHidden } from '../shared/FsEntry'
 import { exec } from 'child_process'
 
-const MAX_PREVIEW_FILE_SIZE = 1 * 1024 * 1024 // = 1mb
+const MAX_PREVIEW_FILE_SIZE = 0.5 * 1024 * 1024 // = 0.5mb
 
 export function enable() {
   console.log('enabling the browser window')
@@ -34,13 +34,14 @@ export function enable() {
 
   handleRequest('requestPreview', async (_ev, args) => {
     if (!fsSync.existsSync(args.path)) {
-      return "ERROR: File doesn't exist."
+      // eslint-disable-next-line prettier/prettier
+      return 'ERROR: File doesn\'t exist.'
     }
 
     if (!args.path.includes('.')) {
       // requested preview of directory
       const children = await fs.readdir(args.path)
-      return children.join('\n')
+      return '|- ' + children.join('\n|- ')
     }
 
     const fileStats = fsSync.statSync(args.path)
