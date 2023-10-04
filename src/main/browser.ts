@@ -62,6 +62,15 @@ export function enable() {
 
     return 'ERROR'
   })
+
+  handleRequest('requestFileEdit', async (_ev, args) => {
+    try {
+      await fs.writeFile(args.filePath, args.updatedText)
+      return { success: true }
+    } catch (error) {
+      return { success: false }
+    }
+  })
 }
 
 function getFileStats(filePath: string): fsSync.Stats | false {

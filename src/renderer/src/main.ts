@@ -1,4 +1,5 @@
 import './assets/style.css'
+import '@vueform/toggle/themes/default.css'
 
 import { createApp } from 'vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
