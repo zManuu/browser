@@ -7,7 +7,7 @@
   <ConfirmComponent ref="cc" />
 </template>
 <script lang="ts">
-import ConfirmComponent from '@renderer/components/ConfirmComponent.vue'
+import ConfirmComponent, { ConfirmComponentType } from '@renderer/components/ConfirmComponent.vue'
 import { defineComponent } from 'vue'
 import * as icons from '@renderer/icons'
 
@@ -15,15 +15,7 @@ export default defineComponent({
   components: { ConfirmComponent },
   methods: {
     cc() {
-      return this.$refs.cc as {
-        open(
-          icon: string,
-          title: string,
-          content: string,
-          hasInput?: boolean,
-          inputPlaceholder?: string
-        ): void
-      }
+      return this.$refs.cc as ConfirmComponentType
     },
     openDeleteTest() {
       this.cc().open(icons.deletee, 'Delete', 'Are you sure you want to delete this file?')

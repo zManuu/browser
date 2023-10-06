@@ -39,6 +39,16 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
+export type ConfirmComponentType = {
+  open(
+    icon: string,
+    title: string,
+    content: string,
+    hasInput?: boolean,
+    inputPlaceholder?: string
+  ): void
+}
+
 export default defineComponent({
   emits: ['confirm', 'cancel'],
   data() {
