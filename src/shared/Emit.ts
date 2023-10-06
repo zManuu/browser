@@ -34,6 +34,11 @@ type WindowRequest = {
 
 type WindowToNode = {
   openFile: string
+  contextMenuAction: {
+    fsEntryPath: string
+    type: 'open.open' | 'open.vsc' | 'open.intelij' | 'open.terminal'
+    args: unknown
+  }
 }
 
 export type { WindowRequest, WindowToNode }
