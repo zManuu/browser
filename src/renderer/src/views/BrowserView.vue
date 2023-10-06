@@ -87,7 +87,8 @@ export default defineComponent({
       } else if (fsEntry.type == 'file') {
         send('contextMenuAction', {
           fsEntryPath,
-          type: 'open.open'
+          type: 'open.open',
+          param: undefined
         })
       }
 

@@ -19,9 +19,9 @@ export default defineComponent({
     style() {
       switch (this.axis) {
         case 'vertical':
-          return 'overflow-y-scroll flex-col'
+          return 'overflow-y-scroll overflow-x-hidden flex-col'
         case 'horizontal':
-          return 'overflow-x-scroll flex-row'
+          return 'overflow-x-scroll overflow-y-hidden flex-row'
         case 'both':
           return 'overflow-x-scroll overflow-y-scroll'
         default:
