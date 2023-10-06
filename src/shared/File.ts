@@ -5,6 +5,7 @@ export interface File extends FsEntry {}
 export const fileTypes = {
   txt: 'txt',
   js: 'js',
+  mjs: 'mjs',
   ts: 'ts',
   vue: 'vue',
   java: 'java',
