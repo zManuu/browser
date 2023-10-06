@@ -85,7 +85,10 @@ export default defineComponent({
       if (fsEntry.type == 'directory') {
         this.$router.push(fsEntryPath)
       } else if (fsEntry.type == 'file') {
-        send('openFile', fsEntryPath)
+        send('contextMenuAction', {
+          fsEntryPath,
+          type: 'open.open'
+        })
       }
 
       this.selectedFsEntry = undefined

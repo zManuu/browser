@@ -6,7 +6,7 @@
         v-for="(item, itemIndex) in menuItems.get(itemCategory)"
         :key="itemIndex"
         class="cursor-pointer hover:bg-slate-600 p-3 flex items-center justify-start space-x-3"
-        @click="item.onClick"
+        @click="handleItemClick(item)"
       >
         <img v-if="item.icon" :src="item.icon" class="w-[1.5rem]" />
         <img v-if="item.icon2" :src="item.icon2" class="w-[1.5rem]" />
@@ -19,12 +19,15 @@
 import { FsEntry } from '@shared/FsEntry'
 import { PropType, defineComponent } from 'vue'
 import * as icons from '@renderer/icons'
+import { contextMenuTypes } from '@shared/Emit'
+import { send } from '@renderer/ipc'
 
 interface IMenuItem {
   name: string
   icon?: string
   icon2?: string
-  onClick?: () => void
+  type: (typeof contextMenuTypes)[number]
+  requiresInput?: boolean
 }
 
 export default defineComponent({
@@ -39,32 +42,39 @@ export default defineComponent({
       const itemMap = new Map<string, IMenuItem[]>()
 
       itemMap.set('Open', [
-        { name: 'Open', icon: icons.open },
-        { name: 'Open in Visual Studio Code', icon: icons.vsc },
-        { name: 'Open in InteliJ', icon: icons.intelij }
+        { name: 'Open', icon: icons.open, type: 'open.open' },
+        { name: 'Open in Visual Studio Code', icon: icons.vsc, type: 'open.vsc' },
+        { name: 'Open in InteliJ', icon: icons.intelij, type: 'open.intelij' }
       ])
 
       itemMap.set('Edit', [
-        { name: 'Rename', icon: icons.rename },
-        { name: 'Delete', icon: icons.deletee },
-        { name: 'Clear', icon: icons.clear }
+        { name: 'Rename', icon: icons.rename, type: 'edit.rename', requiresInput: true },
+        { name: 'Delete', icon: icons.deletee, type: 'edit.delete' },
+        { name: 'Clear', icon: icons.clear, type: 'edit.clear' }
       ])
 
       switch (this.fsEntry.type) {
         case 'directory':
-          itemMap.get('Open')?.push({ name: 'Open in Terminal', icon: icons.terminal })
+          itemMap
+            .get('Open')
+            ?.push({ name: 'Open in Terminal', icon: icons.terminal, type: 'open.terminal' })
 
           itemMap.set('Create', [
-            { name: 'Folder', icon: icons.create_directory },
-            { name: 'Text File', icon: icons.file_txt },
-            { name: 'CSS File', icon: icons.file_css },
-            { name: '.gitignore File', icon: icons.file_gitignore },
-            { name: 'HTML File', icon: icons.file_html },
-            { name: 'Java File', icon: icons.file_java },
-            { name: 'JS File', icon: icons.javaScript },
-            { name: 'JSON File', icon: icons.file_json },
-            { name: 'Vue File', icon: icons.file_vue },
-            { name: 'XML File', icon: icons.file_xml }
+            {
+              name: 'Directory',
+              icon: icons.create_directory,
+              type: 'create.directory',
+              requiresInput: true
+            },
+            { name: 'Text File', icon: icons.file_txt, type: 'create.txt', requiresInput: true },
+            { name: 'CSS File', icon: icons.file_css, type: 'create.css', requiresInput: true },
+            { name: '.gitignore File', icon: icons.file_gitignore, type: 'create.gitignore' },
+            { name: 'HTML File', icon: icons.file_html, type: 'create.html', requiresInput: true },
+            { name: 'Java File', icon: icons.file_java, type: 'create.java', requiresInput: true },
+            { name: 'JS File', icon: icons.javaScript, type: 'create.js', requiresInput: true },
+            { name: 'JSON File', icon: icons.file_json, type: 'create.json', requiresInput: true },
+            { name: 'Vue File', icon: icons.file_vue, type: 'create.vue', requiresInput: true },
+            { name: 'XML File', icon: icons.file_xml, type: 'create.xml', requiresInput: true }
           ])
           break
         case 'file': {
@@ -72,18 +82,32 @@ export default defineComponent({
           switch (fileType) {
             case 'ts':
               itemMap.set('TS-Specific', [
-                { name: 'Compile', icon: icons.typescript, icon2: icons.compile },
-                { name: 'Run', icon: icons.typescript, icon2: icons.run }
+                {
+                  name: 'Compile',
+                  icon: icons.typescript,
+                  icon2: icons.compile,
+                  type: 'ts.compile'
+                },
+                { name: 'Run', icon: icons.typescript, icon2: icons.run, type: 'ts.run' }
               ])
               break
             case 'js':
               itemMap.set('JS-Specific', [
-                { name: 'Run', icon: icons.javaScript, icon2: icons.run }
+                { name: 'Run', icon: icons.javaScript, icon2: icons.run, type: 'js.run' }
+              ])
+              break
+            case 'mjs':
+              itemMap.set('MJS-Specific', [
+                { name: 'Run', icon: icons.javaScript, icon2: icons.run, type: 'mjs.run' }
               ])
               break
             case 'gitignore':
               itemMap.set('Gitignore-Specific', [
-                { name: 'Add recommended settings', icon: icons.file_gitignore }
+                {
+                  name: 'Add recommended settings',
+                  icon: icons.file_gitignore,
+                  type: 'gitignore.addrecommended'
+                }
               ])
               break
           }
@@ -94,6 +118,20 @@ export default defineComponent({
       return itemMap
     }
   },
-  methods: {}
+  methods: {
+    handleItemClick(item: IMenuItem) {
+      if (item.requiresInput) {
+        // TODO: input
+        console.warn(`Item ${item.type} requires input, not implemented yet => abording.`)
+        return
+      }
+
+      send('contextMenuAction', {
+        fsEntryPath: `${this.fsEntry.parentPath}\\${this.fsEntry.name}`,
+        type: item.type,
+        param: undefined
+      })
+    }
+  }
 })
 </script>
