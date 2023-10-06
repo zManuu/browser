@@ -30,6 +30,10 @@ export default createRouter({
         {
           path: 'preview/directory',
           component: () => import('./views/PreviewDirectoryTestView.vue')
+        },
+        {
+          path: 'confirm',
+          component: () => import('./views/ConfirmTestView.vue')
         }
       ]
     }
