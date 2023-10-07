@@ -3,13 +3,18 @@
   <br />
   <button @click="openClearTest">Open a clear-confirm</button>
   <br />
-  <button @click="openCreateFileTest">Open a createfile-confirm</button>
+  <button @click="openRenameTest">Open a rename-confirm</button>
+  <br />
+  <button @click="openCreateTxtFileTest">Open a createfile-confirm (without templates)</button>
+  <br />
+  <button @click="openCreateVueFileTest">Open a createfile-confirm (with templates)</button>
   <ConfirmComponent ref="cc" />
 </template>
 <script lang="ts">
 import ConfirmComponent, { ConfirmComponentType } from '@renderer/components/ConfirmComponent.vue'
 import { defineComponent } from 'vue'
 import * as icons from '@renderer/icons'
+import { templates } from '@shared/File'
 
 export default defineComponent({
   components: { ConfirmComponent },
@@ -23,13 +28,33 @@ export default defineComponent({
     openClearTest() {
       this.cc().open(icons.clear, 'Clear', 'Are you sure you want to clear this file?')
     },
-    openCreateFileTest() {
+    openRenameTest() {
+      this.cc().open(
+        icons.rename,
+        'Rename',
+        'Please enter a new name for this file.',
+        true,
+        'New name'
+      )
+    },
+    openCreateTxtFileTest() {
       this.cc().open(
         icons.file_txt,
         'Create TXT File',
         'What should be the name of the new file?',
         true,
         'File name'
+      )
+    },
+    openCreateVueFileTest() {
+      this.cc().open(
+        icons.file_vue,
+        'Create Vue File',
+        'What should be the name of the new file?',
+        true,
+        'File name',
+        true,
+        templates.get('vue')
       )
     }
   }

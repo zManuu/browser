@@ -24,3 +24,22 @@ export const fileTypes = {
 } as const
 
 export type fileType = keyof typeof fileTypes
+
+export const templates: Map<fileType, Map<string, string>> = new Map([
+  [
+    'vue',
+    new Map<string, string>([
+      ['Hello world', '<template>\nHello World!\n</template>'],
+      [
+        'JS',
+        '<template>\nHello World!\n</template>\n<script lang="js">\nexport default {\n\n}\n</script>'
+      ],
+      ['JS setup', '<template>\nHello World!\n</template>\n<script lang="js" setup>\n\n</script>'],
+      [
+        'TS',
+        '<template>\nHello World!\n</template>\n<script lang="ts">\nexport default defineComponent({\n\n})\n</script>'
+      ],
+      ['TS setup', '<template>\nHello World!\n</template>\n<script lang="ts" setup>\n\n</script>']
+    ])
+  ]
+])
