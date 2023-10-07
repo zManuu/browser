@@ -19,7 +19,7 @@
         :placeholder="inputPlaceholder"
         class="bg-slate-800 px-3 py-1.5 w-full shadow rounded"
       />
-      <div v-if="hasTemplates" class="mt-5">
+      <div v-if="hasTemplates && templates && templates.size > 0" class="mt-5">
         <p class="text-gray-400">Please select a template.</p>
         <ScrollComponent class="max-h-[50vh] bg-slate-800" axis="vertical">
           <div

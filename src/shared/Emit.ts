@@ -44,7 +44,7 @@ type WindowRequest = {
       path: string
       type: PreviewType
     }
-    resArgs: string
+    resArgs: string | { err: 'file_too_big' | 'file_not_found' | 'unknown_type' }
   }
   requestFileEdit: {
     reqArgs: {
@@ -61,7 +61,7 @@ type WindowToNode = {
   contextMenuAction: {
     fsEntryPath: string
     type: (typeof contextMenuTypes)[number]
-    param: string | undefined
+    params: { inputValue: string; selectedTemplate?: string } | undefined
   }
 }
 

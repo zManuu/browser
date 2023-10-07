@@ -7,6 +7,9 @@
     "src/preload/*.d.ts",
     "src/shared/**/*"
   ],
+  "exclude": [
+    "src/renderer/src/assets/test-files/**/*"
+  ],
   "compilerOptions": {
     "composite": true,
     "baseUrl": ".",

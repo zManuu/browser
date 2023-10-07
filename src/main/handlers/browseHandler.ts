@@ -5,8 +5,12 @@ import { handleRequest } from '../ipc'
 import * as fsSync from 'fs'
 import * as fsAsync from 'fs/promises'
 
+const LOG_TAG = '[Browse]'
+
 handleRequest('requestDirectory', async (_ev, directoryName) => {
-  console.log(`A directory was requested and is now being handled: ${directoryName}`)
+  console.log(
+    `${LOG_TAG} A directory was requested and is now being handled: ${directoryName}" ...`
+  )
   const val = await getDirectory(directoryName)
   return val
 })

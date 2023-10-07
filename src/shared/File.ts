@@ -41,5 +41,11 @@ export const templates: Map<fileType, Map<string, string>> = new Map([
       ],
       ['TS setup', '<template>\nHello World!\n</template>\n<script lang="ts" setup>\n\n</script>']
     ])
+  ],
+  [
+    'css',
+    new Map<string, string>([
+      ['Tailwind', '@tailwind base;\n@tailwind components;\n@tailwind utilities;']
+    ])
   ]
 ])

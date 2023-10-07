@@ -18,6 +18,7 @@ import compile from '@renderer/assets/icons/compile.svg'
 import run from '@renderer/assets/icons/run.svg'
 import clear from '@renderer/assets/icons/clear.svg'
 import terminal from '@renderer/assets/icons/terminal.svg'
+import question from '@renderer/assets/icons/question.svg'
 
 export {
   vsc,
@@ -39,5 +40,6 @@ export {
   compile,
   run,
   clear,
-  terminal
+  terminal,
+  question
 }
