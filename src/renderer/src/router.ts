@@ -13,27 +13,27 @@ export default createRouter({
     },
     {
       path: '/test',
-      component: () => import('./views/TestView.vue'),
+      component: () => import('./views/test/TestView.vue'),
       children: [
         {
           path: 'contextmenu/file',
-          component: () => import('./views/ContextMenuFileTestView.vue')
+          component: () => import('./views/test/ContextMenuFileTestView.vue')
         },
         {
           path: 'contextmenu/directory',
-          component: () => import('./views/ContextMenuDirectoryTestView.vue')
+          component: () => import('./views/test/ContextMenuDirectoryTestView.vue')
         },
         {
           path: 'preview/file',
-          component: () => import('./views/PreviewFileTestView.vue')
+          component: () => import('./views/test/PreviewFileTestView.vue')
         },
         {
           path: 'preview/directory',
-          component: () => import('./views/PreviewDirectoryTestView.vue')
+          component: () => import('./views/test/PreviewDirectoryTestView.vue')
         },
         {
           path: 'confirm',
-          component: () => import('./views/ConfirmTestView.vue')
+          component: () => import('./views/test/ConfirmTestView.vue')
         }
       ]
     }
