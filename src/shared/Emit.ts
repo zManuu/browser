@@ -1,6 +1,7 @@
 import { type Directory } from './Directory'
 import { FsEntry } from './FsEntry'
 import { PreviewType } from './PreviewType'
+import { LogRecord } from './LogRecord'
 
 const contextMenuTypes = [
   'open.open',
@@ -65,4 +66,8 @@ type WindowToNode = {
   }
 }
 
-export type { WindowRequest, WindowToNode, contextMenuTypes }
+type NodeToWindow = {
+  log: LogRecord
+}
+
+export type { WindowRequest, WindowToNode, contextMenuTypes, NodeToWindow }

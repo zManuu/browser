@@ -1,4 +1,5 @@
 export default {
   MAX_PREVIEW_FILE_SIZE: 0.5 * 1024 * 1024, // = 0.5mb
-  GITIGNORE_RECOMMENDED: ['node_modules', '.idea', '.vscode', '.DS_Store', 'target']
+  GITIGNORE_RECOMMENDED: ['node_modules', '.idea', '.vscode', '.DS_Store', 'target'],
+  TERMINAL_INPUT_PLACEHOLDER: 'Enter a command...'
 }

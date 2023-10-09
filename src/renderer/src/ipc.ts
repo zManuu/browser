@@ -1,4 +1,5 @@
-import type { WindowRequest, WindowToNode } from '@shared/Emit'
+import type { NodeToWindow, WindowRequest, WindowToNode } from '@shared/Emit'
+import { IpcRendererEvent } from 'electron'
 
 async function request<T extends keyof WindowRequest>(
   key: T,
@@ -13,4 +14,11 @@ function send<T extends keyof WindowToNode>(key: T, args: WindowToNode[T]) {
   window.electron.ipcRenderer.send(key, args)
 }
 
-export { request, send }
+function on<T extends keyof NodeToWindow>(
+  key: T,
+  listener: (event: IpcRendererEvent, args: NodeToWindow[T]) => void
+) {
+  window.electron.ipcRenderer.on(key, listener)
+}
+
+export { request, send, on }

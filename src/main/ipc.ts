@@ -1,4 +1,4 @@
-import { WindowRequest, WindowToNode } from '../shared/Emit'
+import { NodeToWindow, WindowRequest, WindowToNode } from '../shared/Emit'
 import { IpcMainEvent, IpcMainInvokeEvent, ipcMain } from 'electron'
 
 type RequestHandler<T extends keyof WindowRequest> = (
@@ -20,4 +20,8 @@ function handleEmit<T extends keyof WindowToNode>(
   ipcMain.on(key, listener)
 }
 
-export { handleRequest, handleEmit }
+function send<T extends keyof NodeToWindow>(key: T, args: NodeToWindow[T]) {
+  ipcMain.emit(key, args)
+}
+
+export { handleRequest, handleEmit, send }

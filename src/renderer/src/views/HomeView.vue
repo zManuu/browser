@@ -9,6 +9,7 @@
     <router-link to="/test/preview/file">Click to test preview with a file</router-link>
     <router-link to="/test/preview/directory">Click to test preview with a directory</router-link>
     <router-link to="/test/confirm">Click to test the confirm component</router-link>
+    <router-link to="/test/terminal">Click to test the terminal</router-link>
   </div>
 </template>
 <script lang="ts">

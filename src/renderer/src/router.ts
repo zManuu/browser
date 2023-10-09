@@ -34,6 +34,10 @@ export default createRouter({
         {
           path: 'confirm',
           component: () => import('./views/test/ConfirmTestView.vue')
+        },
+        {
+          path: 'terminal',
+          component: () => import('./views/test/TerminalTestView.vue')
         }
       ]
     }
