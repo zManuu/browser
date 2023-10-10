@@ -1,6 +1,6 @@
 <template>
   <div class="flex">
-    <div :class="selectedFsEntry ? 'w-2/3' : 'w-full'">
+    <div :class="selectedFsEntry ? 'w-1/2' : 'w-full'">
       <ScrollComponent class="h-[61vh] w-full" axis="vertical">
         <BrowseUpComponent @go-up="goUp" />
         <FsEntryComponent
@@ -12,7 +12,7 @@
       </ScrollComponent>
       <TerminalComponent />
     </div>
-    <div v-if="selectedFsEntry" class="w-1/3 space-y-[2vh]">
+    <div v-if="selectedFsEntry" class="w-1/2 space-y-[2vh]">
       <ScrollComponent axis="vertical" class="h-[49vh]">
         <ContextMenuComponent :fs-entry="selectedFsEntry" />
       </ScrollComponent>
@@ -27,7 +27,7 @@
 import { FsEntry } from '@shared/FsEntry'
 import { Directory, getParentDirectory } from '@shared/Directory'
 import { defineComponent } from 'vue'
-import { request, send } from '../ipc'
+import { request, send } from '@renderer/ipc'
 import FsEntryComponent from '@renderer/components/FsEntryComponent.vue'
 import BrowseUpComponent from '@renderer/components/BrowseUpComponent.vue'
 import ContextMenuComponent from '@renderer/components/ContextMenuComponent.vue'

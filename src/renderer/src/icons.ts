@@ -27,6 +27,7 @@ import image from '@renderer/assets/icons/image.svg'
 import config_file from '@renderer/assets/icons/config_file.svg'
 import log from '@renderer/assets/icons/log.svg'
 import markdown from '@renderer/assets/icons/markdown.svg'
+import directory_up from '@renderer/assets/icons/directory_up.svg'
 
 const file_ts = typescript
 const file_js = javaScript
@@ -78,5 +79,6 @@ export {
   file_yml,
   log,
   markdown,
-  file_md
+  file_md,
+  directory_up
 }

@@ -5,9 +5,10 @@
       <img :src="settingsIcon" class="w-5 cursor-pointer" @click="showSettingsMenu" />
     </header>
     <ScrollComponent ref="scroll" axis="vertical" class="h-[25vh]">
-      <p v-for="(logRecord, index) in computedLogRecords" :key="index">
-        {{ logRecord }}
-      </p>
+      <div v-for="(logRecord, index) in computedLogRecords" :key="index">
+        <h1>{{ logRecord }}</h1>
+        <div v-if="recordSpacerEnabled" class="my-5 h-0.5 w-auto mx-10 bg-slate-700"></div>
+      </div>
     </ScrollComponent>
     <input ref="in" type="text" class="w-full p-2 bg-slate-900" :placeholder="inputPlaceholder" />
   </div>
@@ -19,7 +20,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import ScrollComponent, { ScrollComponentType } from './ScrollComponent.vue'
+import ScrollComponent from './ScrollComponent.vue'
 import { on } from '@renderer/ipc'
 import Config from '@shared/Config'
 import * as icons from '@renderer/icons'
@@ -56,6 +57,10 @@ export default defineComponent({
             settings.shortenPaths
           )
         )
+    },
+    recordSpacerEnabled() {
+      if (!this.isMounted) return false
+      return this.getSettings().recordSpacer
     }
   },
   mounted() {
@@ -64,7 +69,7 @@ export default defineComponent({
       inputField.focus()
     }
 
-    on('log', (_ev, logRecord) => {
+    on('log', (logRecord) => {
       this.addLogRecord(logRecord)
     })
 
@@ -75,8 +80,9 @@ export default defineComponent({
       this.logRecords.push(logRecord)
 
       // scroll to bottom of scroll component
-      const scrollComponent = this.$refs.scroll as ScrollComponentType
-      scrollComponent.scrollToBottom()
+      // todo: fixx
+      // const scrollComponent = this.$refs.scroll as ScrollComponentType
+      // scrollComponent.scrollToBottom()
     },
     showSettingsMenu() {
       console.log('[Terminal] Showing settings menu ...')

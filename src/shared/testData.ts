@@ -1,6 +1,6 @@
 import { File, fileType, fileTypes } from './File'
 import { Directory } from './Directory'
-import platformCofig from '../shared/Config-Platform'
+import platformCofig from './Config-Platform'
 
 function getTestFile(type: fileType = fileTypes[0]): File {
   return {

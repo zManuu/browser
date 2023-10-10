@@ -27,6 +27,14 @@
           <h1>Show module</h1>
           <input v-model="settings.showModule" type="checkbox" />
         </div>
+        <div class="flex w-[30vw] justify-between items-center">
+          <h1>Auto-Focus terminal input</h1>
+          <input v-model="settings.autoFocusInput" type="checkbox" />
+        </div>
+        <div class="flex w-[30vw] justify-between items-center">
+          <h1>Space between log records</h1>
+          <input v-model="settings.recordSpacer" type="checkbox" />
+        </div>
         <h1 class="font-medium text-lg mt-3">Filter Log-Levels</h1>
         <div
           v-for="logLevel in logLevels"
@@ -64,6 +72,7 @@ export type TerminalSettings = {
   showLevel: boolean
   showModule: boolean
   autoFocusInput: boolean
+  recordSpacer: boolean
   filter: {
     [key in LogLevel]: boolean
   }
@@ -75,6 +84,7 @@ const defaultSettings: TerminalSettings = {
   showLevel: true,
   showModule: true,
   autoFocusInput: true,
+  recordSpacer: true,
   filter: {
     info: true,
     debug: true,
