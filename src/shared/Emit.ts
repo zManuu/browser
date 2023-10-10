@@ -56,6 +56,10 @@ type WindowRequest = {
       success: boolean
     }
   }
+  buildType: {
+    reqArgs: undefined
+    resArgs: 'dev' | 'build'
+  }
 }
 
 type WindowToNode = {

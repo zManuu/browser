@@ -2,6 +2,15 @@ import { createLogger, transports, format, Logger } from 'winston'
 import ForwardTransport from './utils/logForward'
 import Config from '../shared/Config'
 
+export function enable() {
+  logger.info('enabling...')
+
+  import('./handlers/browseHandler')
+  import('./handlers/contextMenuHandler')
+  import('./handlers/previewHandler')
+  import('./handlers/utilsHandler')
+}
+
 export const logger: Logger = createLogger({
   level: 'info',
   format: format.combine(
@@ -18,11 +27,3 @@ export const logger: Logger = createLogger({
     new ForwardTransport()
   ]
 })
-
-export function enable() {
-  logger.info('enabling...')
-
-  import('./handlers/browseHandler')
-  import('./handlers/contextMenuHandler')
-  import('./handlers/previewHandler')
-}

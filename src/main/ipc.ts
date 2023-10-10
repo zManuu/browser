@@ -5,7 +5,7 @@ import { IpcMainEvent, IpcMainInvokeEvent, ipcMain } from 'electron'
 type RequestHandler<T extends keyof WindowRequest> = (
   event: IpcMainInvokeEvent,
   args: WindowRequest[T]['reqArgs']
-) => Promise<WindowRequest[T]['resArgs']>
+) => Promise<WindowRequest[T]['resArgs']> | WindowRequest[T]['resArgs']
 
 async function handleRequest<T extends keyof WindowRequest>(
   key: T,

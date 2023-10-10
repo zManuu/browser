@@ -28,6 +28,7 @@ import config_file from '@renderer/assets/icons/config_file.svg'
 import log from '@renderer/assets/icons/log.svg'
 import markdown from '@renderer/assets/icons/markdown.svg'
 import directory_up from '@renderer/assets/icons/directory_up.svg'
+import placeholder from '@renderer/assets/img/placeholder.png'
 
 const file_ts = typescript
 const file_js = javaScript
@@ -80,5 +81,6 @@ export {
   log,
   markdown,
   file_md,
-  directory_up
+  directory_up,
+  placeholder
 }
