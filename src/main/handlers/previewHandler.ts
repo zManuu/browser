@@ -19,6 +19,9 @@ handleRequest('requestPreview', async (_ev, args) => {
   if (isFileOrDirectory(args.path) === 'directory') {
     // requested preview of directory
     const children = await fsAsync.readdir(args.path)
+    logger.info(
+      `${LOG_TAG} Requested preview of directory >"${args.path}"< responding with ${children.length} children.`
+    )
     return children.length > 0 ? '|- ' + children.join('\n|- ') : ''
   }
 
@@ -33,13 +36,21 @@ handleRequest('requestPreview', async (_ev, args) => {
 
   if (args.type == 'text') {
     const fileBuffer = await fsAsync.readFile(args.path)
+    logger.info(
+      `${LOG_TAG} Requested preview for text file >"${args.path}"<, returning ${fileBuffer.length} bytes.`
+    )
     return fileBuffer.toString('utf-8')
   }
 
   if (args.type == 'img') {
-    return `file:///${args.path}`
+    const imageUrl = `file:///${args.path}`
+    logger.info(`${LOG_TAG} Requested preview for image >"${args.path}"<, returning "${imageUrl}".`)
+    return imageUrl
   }
 
+  logger.warn(
+    `${LOG_TAG} Requested preview for unknown type "${args.type}" (file: >"${args.path}"<).`
+  )
   return { err: 'unknown_type' }
 })
 
