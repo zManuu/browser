@@ -5,7 +5,9 @@
 import TerminalComponent, {
   TerminalComponentType
 } from '@renderer/components/TerminalComponent.vue'
+import { logLevels } from '@shared/LogRecord'
 import { defineComponent } from 'vue'
+import ConfigPlatform from '@shared/Config-Platform'
 
 export default defineComponent({
   components: {
@@ -14,9 +16,21 @@ export default defineComponent({
   mounted() {
     const tc = this.$refs.tc as TerminalComponentType
 
-    for (let i = 0; i < 100; i++) {
-      tc.addLogRecord('07.10.2023 | 18:11:35 [info] enabling the browser window')
+    // basic logs
+    for (const logLevel of logLevels) {
+      tc.addLogRecord({
+        timestamp: '09.10.2023 | 10:47:55',
+        level: logLevel,
+        message: 'Hello World!'
+      })
     }
+
+    // path log
+    tc.addLogRecord({
+      timestamp: '09.10.2023 | 10:47:55',
+      level: 'info',
+      message: `Testing path: >"${ConfigPlatform.PROJECT_PATH}"<`
+    })
   }
 })
 </script>

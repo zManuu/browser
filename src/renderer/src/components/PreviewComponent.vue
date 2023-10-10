@@ -1,5 +1,7 @@
 <template>
-  <div class="flex flex-col w-full select-none opacity-75 hover:opacity-100 bg-slate-800 p-3">
+  <div
+    class="flex flex-col w-full select-none opacity-75 hover:opacity-100 bg-slate-800 p-3 duration-300"
+  >
     <div class="flex w-full justify-between items-center">
       <h1 class="font-semibold text-xl">Preview: {{ fsEntry.name }}</h1>
       <div v-if="previewType == 'text'" class="flex flex-col">
@@ -11,7 +13,7 @@
       {{ previewValue }}
     </p>
     <textarea
-      v-if="previewType == 'text' && isEditable"
+      v-if="previewType == 'text' && isEditable && fsEntry.type == 'file'"
       v-model="previewValue"
       class="whitespace-pre break-words bg-inherit h-screen"
     />
@@ -68,7 +70,10 @@ export default defineComponent({
     loadValue() {
       const type = this.previewType
       const path = `${this.fsEntry.parentPath}\\${this.fsEntry.name}`
-      request('requestPreview', { path, type }).then((res) => (this.previewValue = res))
+      request('requestPreview', { path, type }).then((res) => {
+        if (typeof res === 'object') return
+        this.previewValue = res
+      })
     },
     async saveChanges() {
       const filePath = `${this.fsEntry.parentPath}\\${this.fsEntry.name}`

@@ -19,6 +19,8 @@ import run from '@renderer/assets/icons/run.svg'
 import clear from '@renderer/assets/icons/clear.svg'
 import terminal from '@renderer/assets/icons/terminal.svg'
 import question from '@renderer/assets/icons/question.svg'
+import settings from '@renderer/assets/icons/settings.svg'
+import save from '@renderer/assets/icons/save.svg'
 
 export {
   vsc,
@@ -41,5 +43,7 @@ export {
   run,
   clear,
   terminal,
-  question
+  question,
+  settings,
+  save
 }

@@ -1,3 +1,4 @@
+import { mainWindow } from '.'
 import { NodeToWindow, WindowRequest, WindowToNode } from '../shared/Emit'
 import { IpcMainEvent, IpcMainInvokeEvent, ipcMain } from 'electron'
 
@@ -21,7 +22,7 @@ function handleEmit<T extends keyof WindowToNode>(
 }
 
 function send<T extends keyof NodeToWindow>(key: T, args: NodeToWindow[T]) {
-  ipcMain.emit(key, args)
+  mainWindow?.webContents.send(key, args)
 }
 
 export { handleRequest, handleEmit, send }

@@ -1,10 +1,15 @@
 <template>
-  <div class="flex" :class="style">
+  <div ref="scrollDiv" class="flex" :class="style">
     <slot> Empty scroll-component </slot>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue'
+
+export type ScrollComponentType = {
+  scrollToTop(): void
+  scrollToBottom(): void
+}
 
 export default defineComponent({
   props: {
@@ -27,6 +32,16 @@ export default defineComponent({
         default:
           return ''
       }
+    }
+  },
+  methods: {
+    scrollToTop() {
+      const scrollDiv = this.$refs.scrollDiv as HTMLDivElement
+      scrollDiv.scrollTop = 0
+    },
+    scrollToBottom() {
+      const scrollDiv = this.$refs.scrollDiv as HTMLDivElement
+      scrollDiv.scrollTop = Number.MAX_SAFE_INTEGER
     }
   }
 })

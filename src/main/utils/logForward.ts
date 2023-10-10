@@ -1,11 +1,6 @@
 import Transport from 'winston-transport'
 import { send } from '../ipc'
-
-export type LogRecord = {
-  level: 'debug' | 'info' | 'warn' | 'error'
-  message: string
-  timestamp: string
-}
+import LogRecord from '../../shared/LogRecord'
 
 export default class extends Transport {
   constructor(opts?: Transport.TransportStreamOptions) {
@@ -13,7 +8,7 @@ export default class extends Transport {
   }
 
   public log(data: LogRecord, next: () => void) {
-    send('log', `${data.timestamp} [${data.level}] ${data.message}`)
+    send('log', data)
     next()
   }
 }

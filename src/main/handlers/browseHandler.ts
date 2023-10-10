@@ -2,32 +2,29 @@ import { type Directory } from '../../shared/Directory'
 import { type File } from '../../shared/File'
 import { type FsEntry, isHidden } from '../../shared/FsEntry'
 import { handleRequest } from '../ipc'
-import * as fsSync from 'fs'
 import * as fsAsync from 'fs/promises'
+import { logger } from '../browser'
+import { getFileStats, isFileOrDirectory } from '../utils/fsUtils'
+import { join } from 'path'
 
 const LOG_TAG = '[Browse]'
 
 handleRequest('requestDirectory', async (_ev, directoryName) => {
-  console.log(
-    `${LOG_TAG} A directory was requested and is now being handled: ${directoryName}" ...`
+  logger.info(
+    `${LOG_TAG} A directory was requested and is now being handled: >"${directoryName}"< ...`
   )
   const val = await getDirectory(directoryName)
   return val
 })
 
-function getFileStats(filePath: string): fsSync.Stats | false {
-  try {
-    const statsPromise = fsSync.statSync(filePath)
-    return statsPromise
-  } catch (e) {
-    return false
-  }
-}
-
 async function getDirectory(dirPath: string) {
   const subFilesAndDirectories = await fsAsync.readdir(dirPath)
-  const subFileNames = subFilesAndDirectories.filter((e) => e.includes('.'))
-  const subDirectoryNames = subFilesAndDirectories.filter((e) => !e.includes('.'))
+  const subFileNames = subFilesAndDirectories.filter(
+    (e) => isFileOrDirectory(join(dirPath, e)) === 'file'
+  )
+  const subDirectoryNames = subFilesAndDirectories.filter(
+    (e) => isFileOrDirectory(join(dirPath, e)) === 'directory'
+  )
 
   const subFiles = subFileNames.map((e) => {
     const fileStats = getFileStats(`${dirPath}\\${e}`)

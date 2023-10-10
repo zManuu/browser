@@ -1,13 +1,15 @@
 import { createLogger, transports, format, Logger } from 'winston'
 import ForwardTransport from './utils/logForward'
+import Config from '../shared/Config'
 
 export const logger: Logger = createLogger({
   level: 'info',
   format: format.combine(
-    format.timestamp({ format: 'DD.MM.YYYY | HH:mm:ss' }),
+    format.timestamp({ format: Config.WINSTON_TIME_FORMAT }),
     format.printf(({ timestamp, level, message }) => {
-      // when changing this format, also change the format in the logForward.ts file
-      return `${timestamp} [${level}] ${message}`
+      return Config.WINSTON_LOG_FORMAT.replace('{timestamp}', timestamp)
+        .replace('{level}', level)
+        .replace('{message}', message)
     })
   ),
   transports: [
@@ -18,7 +20,7 @@ export const logger: Logger = createLogger({
 })
 
 export function enable() {
-  logger.info('enabling the browser window')
+  logger.info('enabling...')
 
   import('./handlers/browseHandler')
   import('./handlers/contextMenuHandler')

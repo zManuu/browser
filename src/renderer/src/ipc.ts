@@ -18,6 +18,7 @@ function on<T extends keyof NodeToWindow>(
   key: T,
   listener: (event: IpcRendererEvent, args: NodeToWindow[T]) => void
 ) {
+  console.log(`[IPC] Adding listener for ${key}.`)
   window.electron.ipcRenderer.on(key, listener)
 }
 

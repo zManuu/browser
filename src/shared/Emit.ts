@@ -1,7 +1,7 @@
 import { type Directory } from './Directory'
 import { FsEntry } from './FsEntry'
 import { PreviewType } from './PreviewType'
-import { LogRecord } from './LogRecord'
+import LogRecord from './LogRecord'
 
 const contextMenuTypes = [
   'open.open',

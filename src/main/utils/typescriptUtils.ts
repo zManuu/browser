@@ -2,17 +2,18 @@ import { exec } from 'child_process'
 import { join } from 'path'
 import { generateUUID } from './uuidUtils'
 import * as util from 'util'
+import { logger } from '../browser'
 
 const execPromise = util.promisify(exec)
 const LOG_TAG = '[TypeScript]'
 
 async function compileTypescriptFile(path: string, forAutoRun = false): Promise<string | boolean> {
-  console.log(`${LOG_TAG} Compiling ts-script "${path}" with autoRun ${forAutoRun}  ...`)
+  logger.info(`${LOG_TAG} Compiling ts-script >"${path}"< with autoRun ${forAutoRun}  ...`)
   const fileName = path.split('\\').pop()
   const fileDirectory = path.split('\\').slice(0, -1).join('\\')
 
   if (!fileName) {
-    console.warn(`${LOG_TAG} Could not determine file name from path "${path}".`)
+    logger.warn(`${LOG_TAG} Could not determine file name from path >"${path}"<.`)
     return false
   }
 
@@ -31,27 +32,27 @@ async function compileTypescriptFile(path: string, forAutoRun = false): Promise<
     const { stderr } = await execPromise(`tsc "${path}" --outFile "${outFileName}" --module amd`)
 
     if (stderr) {
-      console.error(`${LOG_TAG} Stderr while compiling ts-script "${path}".`)
+      logger.error(`${LOG_TAG} Stderr while compiling ts-script >"${path}"<.`)
       return false
     }
 
-    console.log(`${LOG_TAG} Finished compiling ts-script "${path}".`)
+    logger.info(`${LOG_TAG} Finished compiling ts-script >"${path}"<.`)
     return outFileName
   } catch (error) {
-    console.error(`${LOG_TAG} Error while compiling ts-script "${path}".`)
+    logger.error(`${LOG_TAG} Error while compiling ts-script >"${path}"<.`)
     return false
   }
 }
 
 async function runTypescriptFile(path: string) {
-  console.log(`${LOG_TAG} Starting ts-script "${path}" ...`)
+  logger.info(`${LOG_TAG} Starting ts-script >"${path}"< ...`)
   try {
     const compiledPath = await compileTypescriptFile(path, true)
     if (!compiledPath) return
 
     await execPromise(`node "${compiledPath}"`)
   } catch (e) {
-    console.warn(`${LOG_TAG} Error while compiling / running ts-script "${path}".`)
+    logger.warn(`${LOG_TAG} Error while compiling / running ts-script >"${path}"<.`)
   }
 }
 

@@ -1,18 +1,17 @@
 <template>
   <div class="flex">
-    <ScrollComponent
-      :class="selectedFsEntry ? 'w-2/3' : 'w-full'"
-      class="max-h-screen"
-      axis="vertical"
-    >
-      <BrowseUpComponent @go-up="goUp" />
-      <FsEntryComponent
-        v-for="(fsEntry, index) in shownFsEntries"
-        :key="index"
-        :fs-entry="fsEntry"
-        @handle-click="handleClick(fsEntry)"
-      />
-    </ScrollComponent>
+    <div :class="selectedFsEntry ? 'w-2/3' : 'w-full'">
+      <ScrollComponent class="h-[70vh] w-full" axis="vertical">
+        <BrowseUpComponent @go-up="goUp" />
+        <FsEntryComponent
+          v-for="(fsEntry, index) in shownFsEntries"
+          :key="index"
+          :fs-entry="fsEntry"
+          @handle-click="handleClick(fsEntry)"
+        />
+      </ScrollComponent>
+      <TerminalComponent />
+    </div>
     <div v-if="selectedFsEntry" class="w-1/3 space-y-[2vh]">
       <ScrollComponent axis="vertical" class="h-[49vh]">
         <ContextMenuComponent :fs-entry="selectedFsEntry" />
@@ -34,6 +33,7 @@ import BrowseUpComponent from '@renderer/components/BrowseUpComponent.vue'
 import ContextMenuComponent from '@renderer/components/ContextMenuComponent.vue'
 import PreviewComponent from '@renderer/components/PreviewComponent.vue'
 import ScrollComponent from '@renderer/components/ScrollComponent.vue'
+import TerminalComponent from '@renderer/components/TerminalComponent.vue'
 
 export default defineComponent({
   components: {
@@ -41,7 +41,8 @@ export default defineComponent({
     BrowseUpComponent,
     ContextMenuComponent,
     PreviewComponent,
-    ScrollComponent
+    ScrollComponent,
+    TerminalComponent
   },
   data() {
     return {
@@ -88,7 +89,7 @@ export default defineComponent({
         send('contextMenuAction', {
           fsEntryPath,
           type: 'open.open',
-          param: undefined
+          params: undefined
         })
       }
 
