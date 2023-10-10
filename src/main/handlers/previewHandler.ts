@@ -37,8 +37,7 @@ handleRequest('requestPreview', async (_ev, args) => {
   }
 
   if (args.type == 'img') {
-    const fileBuffer = await fsAsync.readFile(args.path)
-    return fileBuffer.toString('base64')
+    return `file:///${args.path}`
   }
 
   return { err: 'unknown_type' }

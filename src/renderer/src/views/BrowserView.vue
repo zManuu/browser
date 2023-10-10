@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
     <div :class="selectedFsEntry ? 'w-2/3' : 'w-full'">
-      <ScrollComponent class="h-[70vh] w-full" axis="vertical">
+      <ScrollComponent class="h-[61vh] w-full" axis="vertical">
         <BrowseUpComponent @go-up="goUp" />
         <FsEntryComponent
           v-for="(fsEntry, index) in shownFsEntries"

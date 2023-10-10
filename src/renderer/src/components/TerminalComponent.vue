@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full opacity-75 hover:opacity-100 duration-300">
+  <div class="w-full opacity-75 hover:opacity-100 duration-300 h-[39vh]">
     <header class="bg-slate-700 flex justify-between items-center w-full p-2">
       <h1 class="font-semibold text-xl">Terminal</h1>
       <img :src="settingsIcon" class="w-5 cursor-pointer" @click="showSettingsMenu" />
