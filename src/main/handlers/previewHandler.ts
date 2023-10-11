@@ -55,10 +55,13 @@ handleRequest('requestPreview', async (_ev, args) => {
 })
 
 handleRequest('requestFileEdit', async (_ev, args) => {
+  logger.info(`${LOG_TAG} Requesting file edit for >"${args.filePath}"< ...`)
   try {
     await fsAsync.writeFile(args.filePath, args.updatedText)
+    logger.info(`${LOG_TAG} Requested file edit for >"${args.filePath}"< was successfull.`)
     return { success: true }
   } catch (error) {
+    logger.warn(`${LOG_TAG} Requested file edit for >"${args.filePath}"< failed.`)
     return { success: false }
   }
 })
